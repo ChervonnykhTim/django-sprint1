@@ -70,4 +70,3 @@ def category_posts(request, category_slug):
         'slug_name': category_slug,
     }
     return render(request, 'blog/category.html', context)
-
