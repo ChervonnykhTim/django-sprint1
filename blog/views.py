@@ -45,10 +45,16 @@ posts = [
 
 
 def index(request):
-    context = {
-        'posts': posts,
-    }
-    return render(request, 'blog/index.html', context)
+    template = 'blog/index.html'
+    # Сортируем список постов по ключу даты в обратном порядке (reverse=True)
+    sorted_posts = sorted(
+        posts, 
+        key=lambda x: x['pub_date'], 
+        reverse=True
+    )
+    # Берем только первые 5 (согласно условиям задания)
+    context = {'post_list': sorted_posts[:5]}
+    return render(request, template, context)
 
 
 def post_detail(request, id):
