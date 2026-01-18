@@ -48,8 +48,8 @@ def index(request):
     template = 'blog/index.html'
     # Сортируем список постов по ключу даты в обратном порядке (reverse=True)
     sorted_posts = sorted(
-        posts, 
-        key=lambda x: x['pub_date'], 
+        posts,
+        key=lambda x: x['pub_date'],
         reverse=True
     )
     # Берем только первые 5 (согласно условиям задания)
