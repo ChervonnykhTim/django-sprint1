@@ -19,7 +19,7 @@
             <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
             Блогикум
           </a>        
-          <ul class="nav  nav-pills">
+          <ul class="nav nav-pills">
             <li class="nav-item">
               <a class="nav-link {% if request.resolver_match.view_name == 'blog:index' %}active{% endif %}" href="{% url 'blog:index' %}">
                 Лента записей
@@ -40,22 +40,27 @@
       </nav> 
     </header>
     <main>
-  <div class="container py-5">
-    <h1>Лента записей</h1>
-    {% for post in post_list %}
-    <article>
-      <ul>
-        <li>Место: {{ post.location }}</li>
-        <li>Дата: {{ post.date }}</li>
-        <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
-      </ul>
-      <p>{{ post.text|linebreaksbr }}</p>
-      <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
-    </article>
-    {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %}
-  </div>
-</main>
+      <div class="container py-5">
+        <h1>Лента записей</h1>
+        {% for post in post_list %}
+          <article>
+            <ul>
+              <li>Место: {{ post.location }}</li>
+              <li>Дата: {{ post.date }}</li>
+              <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+            </ul>
+            <!-- Фильтр linebreaksbr обязателен, чтобы текст не слипся в одну строку -->
+            <p>{{ post.text|linebreaksbr }}</p>
+            <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+          </article>
+          {% if not forloop.last %}
+            <hr>
+          {% endif %}
+        {% empty %}
+          <p>Записей пока нет.</p>
+        {% endfor %}
+      </div>
+    </main>
     <footer class="border-top text-center py-3">
       <p>© Блогикум</p>    
     </footer>
