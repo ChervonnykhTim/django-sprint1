@@ -53,7 +53,7 @@ def index(request):
     )
     context = {'post_list': sorted_posts[:5]}
     return render(request, template, context)
-         
+
 
 def post_detail(request, id):
     for post in posts:
