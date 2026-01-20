@@ -4,7 +4,7 @@ posts = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
-        'pub_date': '30 сентября 1659 года',
+        'date': '30 сентября 1659 года',
         'category': 'travel',
         'text': '''Наш корабль, застигнутый в открытом море
                 страшным штормом, потерпел крушение.
@@ -16,7 +16,7 @@ posts = [
     {
         'id': 1,
         'location': 'Остров отчаянья',
-        'pub_date': '1 октября 1659 года',
+        'date': '1 октября 1659 года',
         'category': 'not-my-day',
         'text': '''Проснувшись поутру, я увидел, что наш корабль сняло
                 с мели приливом и пригнало гораздо ближе к берегу.
@@ -32,7 +32,7 @@ posts = [
     {
         'id': 2,
         'location': 'Остров отчаянья',
-        'pub_date': '25 октября 1659 года',
+        'date': '25 октября 1659 года',
         'category': 'not-my-day',
         'text': '''Всю ночь и весь день шёл дождь и дул сильный
                 порывистый ветер. 25 октября.  Корабль за ночь разбило
@@ -48,7 +48,7 @@ def index(request):
     template = 'blog/index.html'
     sorted_posts = sorted(
         posts,
-        key=lambda x: x['pub_date'],
+        key=lambda item: item['id'],
         reverse=True
     )
     context = {'post_list': sorted_posts[:5]}
@@ -56,21 +56,11 @@ def index(request):
 
 
 def post_detail(request, id):
-    for post in posts:
-        if post['id'] == id:
-            current_post = post
-            break
-    else:
-        current_post = None
-
-    context = {
-        'post': current_post,
-    }
+    current_post = next((post for post in posts if post['id'] == id), None)
+    context = {'post': current_post}
     return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    context = {
-        'slug_name': category_slug,
-    }
+    context = {'slug_name': category_slug}
     return render(request, 'blog/category.html', context)
