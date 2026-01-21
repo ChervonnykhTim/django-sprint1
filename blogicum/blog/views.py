@@ -48,7 +48,7 @@ def index(request):
     template = 'blog/index.html'
     sorted_posts = sorted(
         posts,
-        key=lambda x: x['id'],
+        key=lambda item: item['id'],
         reverse=True
     )
     context = {'post_list': sorted_posts[:5]}
@@ -56,7 +56,7 @@ def index(request):
 
 
 def post_detail(request, id):
-    current_post = next((p for p in posts if p['id'] == id), None)
+    current_post = next((post for post in posts if post['id'] == id), None)
     context = {'post': current_post}
     return render(request, 'blog/detail.html', context)
 
