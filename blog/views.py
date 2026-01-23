@@ -57,7 +57,8 @@ def index(request):
 
 def post_detail(request, id):
     post_id = int(id)
-    current_post = next((post for post in posts if post['id'] == post_id), None)
+    current_post = next((post for post in posts if post['id'] == post_id),
+                        None)
     context = {'post': current_post}
     return render(request, 'blog/detail.html', context)
 
