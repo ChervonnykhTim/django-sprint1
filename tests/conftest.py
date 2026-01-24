@@ -90,24 +90,24 @@ EXPECTED_POSTS = [
 def try_get_url(client, url: str):
     try:
         response = client.get(url)
-    except TemplateDoesNotExist as e:
+    except TemplateDoesNotExist as err:
         raise AssertionError(
             f'При загрузке страницы по адресу `{url}` возникла ошибка. '
             'Убедитесь, что указанный для страницы шаблон существует '
             'и находится в правильной директории.'
-        ) from e
-    except TypeError as e:
+        ) from err
+    except TypeError as err:
         raise AssertionError(
             f'При загрузке страницы по адресу `{url}` '
             'возникла ошибка TypeError. '
             'Убедитесь, что используете Path Converter '
             'для приведения параметра строки запроса к нужному типу.'
-        ) from e
-    except Exception as e:
+        ) from err
+    except Exception as err:
         raise AssertionError(
             f'При попытке загрузки страницы по адресу `{url}` возникла ошибка:'
-            f' {e}'
-        ) from e
+            f' {err}'
+        ) from err
     else:
         if response.status_code < 300:
             return response
@@ -116,6 +116,3 @@ def try_get_url(client, url: str):
             f' {response}'
         )
 
-
-# Эти автотесты были написаны и даны изначально,
-# проект прикрепленный в GitHab уже имел эти файлы
