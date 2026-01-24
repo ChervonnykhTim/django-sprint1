@@ -31,7 +31,8 @@ def test_apps_registered(settings_app_name, project_dirname):
     settings_app = __import__(f'{settings_app_name}')
     installed_apps = settings_app.settings.INSTALLED_APPS
     registered = set(installed_apps)
-    app_names = ' и '.join(f'`{app_name}`' for app_name in register_apps_old_style)
+    app_names = ' и '.join(f'`{app_name}`'
+                           for app_name in register_apps_old_style)
     assert set(register_apps_new_style).issubset(registered) or (
         set(register_apps_old_style).issubset(registered)
     ), (

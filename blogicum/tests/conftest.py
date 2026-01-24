@@ -115,4 +115,3 @@ def try_get_url(client, url: str):
             f'При попытке загрузки страницы по адресу `{url}` возникла ошибка:'
             f' {response}'
         )
-
