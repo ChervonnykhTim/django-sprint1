@@ -8,8 +8,6 @@ from tests.conftest import try_get_url
         ('/category/another_slug/', 'another_slug'),
     ]
 )
-
-
 def test_category_page_contents(client, url, slug):
     response = try_get_url(client, url)
     expected_slug = '<slug>'
