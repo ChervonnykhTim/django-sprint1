@@ -26,7 +26,12 @@ def test_page_templates(client, url, template):
     ))
 
 
-@pytest.mark.parametrize('post_id', (0, 1, 2))
+POST_ID_0 = 0
+POST_ID_1 = 1
+POST_ID_2 = 2
+
+
+@pytest.mark.parametrize('post_id', (POST_ID_0, POST_ID_1, POST_ID_2))
 def test_post_detail(post_id, client, posts):
     url = f'/posts/{post_id}/'
     response = try_get_url(client, url)

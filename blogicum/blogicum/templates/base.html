@@ -18,7 +18,7 @@
             <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
             Блогикум
           </a>
-          <ul class="nav  nav-pills">
+          <ul class="nav nav-pills">
             <li class="nav-item">
               <a class="nav-link {% if request.resolver_match.view_name == 'blog:index' %}active{% endif %}" href="{% url 'blog:index' %}">
                 Лента записей
@@ -39,8 +39,10 @@
       </nav>
     </header>
     <main>
-      {% block content %}
-      {% endblock content %}
+      <div class="container py-5">
+        {% block content %}
+          {% endblock content %}
+      </div>
     </main>
     <footer class="border-top text-center py-3">
       <p>© Блогикум</p>
